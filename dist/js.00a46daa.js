@@ -117,28 +117,9 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/task1.js":[function(require,module,exports) {
-var delay = function delay(ms) {
-  var DELAY = ms;
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve("\u2705 ".concat(DELAY));
-    }, DELAY);
-  });
-};
+})({"js/index.js":[function(require,module,exports) {
 
-var logger = function logger(time) {
-  return console.log("Resolved after ".concat(time, "ms"));
-};
-
-delay(2000).then(logger);
-delay(1000).then(logger);
-delay(1500).then(logger);
-},{}],"js/index.js":[function(require,module,exports) {
-"use strict";
-
-require("./task1");
-},{"./task1":"js/task1.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
