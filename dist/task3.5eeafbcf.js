@@ -118,7 +118,61 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/task3.js":[function(require,module,exports) {
+var randomIntegerFromInterval = function randomIntegerFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 
+var makeTransaction = function makeTransaction(transaction, onSuccess, onError) {
+  return new Promise(function (resolve, reject) {
+    var delay = randomIntegerFromInterval(200, 500);
+    setTimeout(function () {
+      var canProcess = Math.random() > 0.3;
+      var logSuccess = (transaction.id, delay);
+      var id = transaction.id;
+      var time = delay;
+
+      if (canProcess) {
+        resolve({
+          id: id,
+          time: time
+        });
+      } else {
+        reject(id);
+      }
+    }, delay);
+  });
+};
+
+var logSuccess = function logSuccess(_ref) {
+  var id = _ref.id,
+      time = _ref.time;
+  console.log("Transaction ".concat(id, " processed in ").concat(time, "ms"));
+};
+
+var logError = function logError(id) {
+  console.warn("Error processing transaction ".concat(id, ". Please try again later."));
+}; // makeTransaction({ id: 70, amount: 150 }, logSuccess, logError);
+// makeTransaction({ id: 71, amount: 230 }, logSuccess, logError);
+// makeTransaction({ id: 72, amount: 75 }, logSuccess, logError);
+// makeTransaction({ id: 73, amount: 100 }, logSuccess, logError);
+
+
+makeTransaction({
+  id: 70,
+  amount: 150
+}).then(logSuccess).catch(logError);
+makeTransaction({
+  id: 71,
+  amount: 230
+}).then(logSuccess).catch(logError);
+makeTransaction({
+  id: 72,
+  amount: 75
+}).then(logSuccess).catch(logError);
+makeTransaction({
+  id: 73,
+  amount: 100
+}).then(logSuccess).catch(logError);
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
