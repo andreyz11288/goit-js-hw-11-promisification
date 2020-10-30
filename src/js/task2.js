@@ -1,19 +1,29 @@
-const delay = ms => {
-    const DELAY = ms;
 
-    
-  return new Promise((resolve) => {
-   
 
-    setTimeout(() => {      
-        resolve(`✅ ${DELAY}`);      
-    }, DELAY);
-  });
- 
+
+const users = [
+  { name: 'Mango', active: true },
+  { name: 'Poly', active: false },
+  { name: 'Ajax', active: true },
+  { name: 'Lux', active: false },
+];
+
+const toggleUserState = (allUsers, userName, callback) => {
+  
+  const updatedUsers = allUsers.map(user =>
+    user.name === userName ? { ...user, active: !user.active } : user, );   
+  
+  
+  return new Promise((resolve) => {    
+         
+        resolve(updatedUsers);    
+         
+  }); 
+  
 };
 
-const logger = time => console.log(`Resolved after ${time}ms`);
+const logger = updatedUsers => console.table(updatedUsers);
 
-delay(2000).then(logger); 
-delay(1000).then(logger); 
-delay(1500).then(logger); 
+
+toggleUserState(users, 'Mango').then(logger);
+toggleUserState(users, 'Lux').then(logger);
